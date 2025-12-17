@@ -18,13 +18,14 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
+  final List<Widget> pages = [
+    HomePage(),
+    TransactionsPage(),
+    RecurringPaymentPage(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    final List<Widget> pages = [
-      HomePage(),
-      TransactionsPage(),
-      RecurringPaymentPage(),
-    ];
     return Scaffold(
       appBar: AppBar(leading: Icon(Icons.settings, color: Colors.grey)),
       body: Center(child: pages[currentPage]),

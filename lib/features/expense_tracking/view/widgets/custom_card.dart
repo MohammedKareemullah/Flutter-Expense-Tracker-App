@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:expense_tracker_app/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 
