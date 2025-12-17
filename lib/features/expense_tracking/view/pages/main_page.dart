@@ -1,6 +1,7 @@
+import 'package:expense_tracker_app/core/theme/palette.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/Pages/home_page.dart';
-import 'package:expense_tracker_app/features/expense_tracking/view/Pages/recurring_payment_page.dart';
-import 'package:expense_tracker_app/features/expense_tracking/view/Pages/transactions_page.dart';
+import 'package:expense_tracker_app/features/expense_tracking/view/pages/recurring_payment_page.dart';
+import 'package:expense_tracker_app/features/expense_tracking/view/pages/transactions_page.dart';
 import 'package:flutter/material.dart';
 
 class MainPage extends StatefulWidget {
@@ -29,6 +30,17 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(leading: Icon(Icons.settings, color: Colors.grey)),
       body: Center(child: pages[currentPage]),
+      floatingActionButton: SizedBox(
+        height: 80,
+        width: 80,
+        child: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Palette.primaryBlack,
+          shape: const CircleBorder(),
+          child: const Icon(Icons.add, color: Colors.white, size: 40),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: Colors.white, // Match your Background Color
@@ -45,8 +57,20 @@ class _MainPageState extends State<MainPage> {
             ),
           ],
         ),
-        child: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
+        child: BottomAppBar(
+          shape: const CircularNotchedRectangle(),
+          notchMargin: 6,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              buildNavItem(Icons.home_outlined, "Home", 0),
+              buildNavItem(Icons.receipt_long_outlined, "Transaction", 1),
+              SizedBox(width: 40),
+              buildNavItem(Icons.currency_exchange_outlined, "Recurring", 2),
+              buildNavItem(Icons.person_outline, "Account", 4),
+            ],
+          ),
+          /*items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
             BottomNavigationBarItem(
               icon: Icon(Icons.monetization_on_rounded),
@@ -59,7 +83,34 @@ class _MainPageState extends State<MainPage> {
           ],
           currentIndex: currentPage,
           onTap: onTap,
-          elevation: 23,
+          elevation: 23,*/
+        ),
+      ),
+    );
+  }
+
+  Widget buildNavItem(IconData icon, String label, int pos) {
+    final isSelected = pos == currentPage;
+    return InkWell(
+      onTap: () => onTap(pos),
+      child: Padding(
+        padding: EdgeInsets.only(left: 8, right: 8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              color: isSelected ? Palette.primaryBlack : Palette.greyColor,
+              size: 30,
+            ),
+            Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? Palette.primaryBlack : Palette.greyColor,
+                fontSize: 15,
+              ),
+            ),
+          ],
         ),
       ),
     );
