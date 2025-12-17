@@ -1,5 +1,5 @@
 import 'package:expense_tracker_app/core/theme/theme.dart';
-import 'package:expense_tracker_app/features/expense_tracking/view/Pages/home_page.dart';
+import 'package:expense_tracker_app/features/expense_tracking/view/Pages/main_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,10 +13,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: Apptheme().theme,
 
-      home: HomePage(),
+      home: MainPage(),
     );
   }
 }

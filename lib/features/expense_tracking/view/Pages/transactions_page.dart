@@ -10,6 +10,13 @@ class TransactionsPage extends StatefulWidget {
 class _TransactionsPageState extends State<TransactionsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text("Transactions Page")));
+    return Scaffold(
+      body: Center(
+        child: Text(
+          "Transactions Page",
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
+    );
   }
 }
