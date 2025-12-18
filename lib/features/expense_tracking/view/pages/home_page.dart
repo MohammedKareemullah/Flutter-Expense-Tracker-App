@@ -1,5 +1,6 @@
 import 'package:expense_tracker_app/core/theme/palette.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/Pages/transaction_data.dart';
+import 'package:expense_tracker_app/features/expense_tracking/view/Pages/transactions_page.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/custom_card.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/transaction_card.dart';
 import 'package:flutter/material.dart';
@@ -22,20 +23,20 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomCard(
+            const CustomCard(
               income: 123.3,
               expense: 187.7,
               expenseIcon: Icons.wallet_outlined,
               incomeIcon: Icons.savings_outlined,
             ),
-            SizedBox(height: 15),
-            Divider(),
+            const SizedBox(height: 15),
+            const Divider(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 6),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     "RECENT TRANSACTION",
                     style: TextStyle(
                       color: Palette.greyColor,
@@ -44,8 +45,14 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   TextButton(
-                    onPressed: () {},
-                    child: Text(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const TransactionsPage(),
+                        ),
+                      );
+                    },
+                    child: const Text(
                       "See all",
                       style: TextStyle(
                         color: Colors.blue,
@@ -57,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
                 itemCount: min(transactions.length, 4),

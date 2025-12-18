@@ -12,14 +12,17 @@ class HiveRepository {
     box.put(transaction.id, transaction);
   }
 
-  Future<void> deleteTransaction(int transactionId) async {
+  Future<void> deleteTransaction(Transaction transaction) async {
     final Box<Transaction> box = await _box;
-    box.delete(transactionId);
+    box.delete(transaction.id);
   }
 
-  Future<void> updateTransaction(Transaction transaction) async {
+  Future<void> updateTransaction(
+    String id,
+    Transaction updatedtransaction,
+  ) async {
     final Box<Transaction> box = await _box;
-    box.put(transaction.id, transaction);
+    box.put(id, updatedtransaction);
   }
 
   Future<List<Transaction>> getTransactions() async {

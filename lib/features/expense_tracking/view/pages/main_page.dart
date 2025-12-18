@@ -21,9 +21,9 @@ class _MainPageState extends State<MainPage> {
   }
 
   final List<Widget> pages = [
-    HomePage(),
-    TransactionsPage(),
-    RecurringPaymentPage(),
+    const HomePage(),
+    const TransactionsPage(),
+    const RecurringPaymentPage(),
   ];
 
   @override
@@ -70,7 +70,7 @@ class _MainPageState extends State<MainPage> {
             children: [
               buildNavItem(Icons.home_outlined, "Home", 0),
               buildNavItem(Icons.receipt_long_outlined, "Transaction", 1),
-              SizedBox(width: 40),
+              const SizedBox(width: 40),
               buildNavItem(Icons.currency_exchange_outlined, "Recurring", 2),
               buildNavItem(Icons.person_outline, "Account", 4),
             ],
