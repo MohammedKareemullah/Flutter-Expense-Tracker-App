@@ -12,6 +12,8 @@ void main() async {
   Hive.init(directory.path);
 
   Hive.registerAdapter(TransactionAdapter());
+  Hive.registerAdapter(TransactionTypeAdapter());
+  Hive.registerAdapter(TransactionCategoryAdapter());
   runApp(const MyApp());
 }
 
@@ -25,7 +27,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: Apptheme().theme,
-      home: AddTransaction(),
+      home: MainPage(),
     );
   }
 }

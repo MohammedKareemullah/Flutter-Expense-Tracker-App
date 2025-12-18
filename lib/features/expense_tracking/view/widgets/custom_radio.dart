@@ -1,45 +1,33 @@
 import 'package:expense_tracker_app/features/expense_tracking/model/transaction.dart';
 import 'package:flutter/material.dart';
 
-class CustomRadio extends StatefulWidget {
+class CustomRadio extends StatelessWidget {
   final String radioText1;
   final String radioText2;
+  final TransactionType selectedType;
+  final Function(TransactionType) onTypeChanged;
   const CustomRadio({
     super.key,
     required this.radioText1,
     required this.radioText2,
+    required this.onTypeChanged,
+    required this.selectedType,
   });
-
-  @override
-  State<CustomRadio> createState() => _CustomRadioState();
-}
-
-class _CustomRadioState extends State<CustomRadio> {
-  TransactionType type = TransactionType.expense;
-
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        // Create a RadioListTile for option 1
         Expanded(
           child: RadioListTile(
             title: Text(
-              widget.radioText1,
+              radioText1,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
-            value: TransactionType.income, // Assign a value of 1 to this option
-            groupValue: type, // Use _selectedValue to track the selected option
+            value: TransactionType.values.byName(radioText1.toLowerCase()),
+            groupValue: selectedType,
             onChanged: (value) {
-              setState(() {
-                type =
-                    value!; // Update _selectedValue when option 1 is selected
-              });
+              if (value != null) onTypeChanged(value);
             },
           ),
         ),
@@ -48,17 +36,13 @@ class _CustomRadioState extends State<CustomRadio> {
         Expanded(
           child: RadioListTile(
             title: Text(
-              widget.radioText2,
+              radioText2,
               style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-            ), // Display the title for option 2          // Display a subtitle for option 2
-            value:
-                TransactionType.expense, // Assign a value of 2 to this option
-            groupValue: type, // Use _selectedValue to track the selected option
+            ),
+            value: TransactionType.values.byName(radioText2.toLowerCase()),
+            groupValue: selectedType,
             onChanged: (value) {
-              setState(() {
-                type =
-                    value!; // Update _selectedValue when option 2 is selected
-              });
+              if (value != null) onTypeChanged(value);
             },
           ),
         ),

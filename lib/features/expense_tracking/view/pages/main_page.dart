@@ -1,4 +1,5 @@
 import 'package:expense_tracker_app/core/theme/palette.dart';
+import 'package:expense_tracker_app/features/expense_tracking/view/Pages/add_transaction.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/Pages/home_page.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/pages/recurring_payment_page.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/pages/transactions_page.dart';
@@ -34,7 +35,11 @@ class _MainPageState extends State<MainPage> {
         height: 80,
         width: 80,
         child: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (context) => AddTransaction()));
+          },
           backgroundColor: Palette.primaryBlack,
           shape: const CircleBorder(),
           child: const Icon(Icons.add, color: Colors.white, size: 40),

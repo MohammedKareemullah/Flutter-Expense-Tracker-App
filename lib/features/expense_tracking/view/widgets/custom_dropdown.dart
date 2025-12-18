@@ -1,21 +1,17 @@
 import 'package:expense_tracker_app/core/theme/palette.dart';
+import 'package:expense_tracker_app/features/expense_tracking/model/transaction.dart';
 import 'package:flutter/material.dart';
 
-class CustomDropdown extends StatefulWidget {
+class CustomDropdown extends StatelessWidget {
   final List<String> category;
-  const CustomDropdown({super.key, required this.category});
-
-  @override
-  State<CustomDropdown> createState() => _CustomDropdownState();
-}
-
-class _CustomDropdownState extends State<CustomDropdown> {
-  String? selectedCategory;
-  @override
-  void initState() {
-    super.initState();
-    selectedCategory = widget.category[0];
-  }
+  final TransactionCategory selectedCategory;
+  final Function(TransactionCategory) onCategoryChanged;
+  const CustomDropdown({
+    super.key,
+    required this.category,
+    required this.selectedCategory,
+    required this.onCategoryChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,14 +24,14 @@ class _CustomDropdownState extends State<CustomDropdown> {
       child: Center(
         child: DropdownButton<String>(
           hint: Text('select category'),
-          value: selectedCategory,
+          value: selectedCategory.name,
           //itemHeight: 10,
-          onChanged: (String? newvalue) {
-            setState(() {
-              selectedCategory = newvalue;
-            });
+          onChanged: (String? value) {
+            if (value != null) {
+              onCategoryChanged(TransactionCategory.values.byName(value));
+            }
           },
-          items: widget.category.map<DropdownMenuItem<String>>((String val) {
+          items: category.map<DropdownMenuItem<String>>((String val) {
             return DropdownMenuItem(
               value: val,
               child: Text(
