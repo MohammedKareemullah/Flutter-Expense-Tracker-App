@@ -1,18 +1,38 @@
+import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart'; // Optional: for generating unique IDs
 
-enum TransactionType { income, expense }
+part 'transaction.g.dart';
 
+@HiveType(typeId: 1)
+enum TransactionType {
+  @HiveField(0)
+  income,
+  @HiveField(1)
+  expense,
+}
+
+@HiveType(typeId: 2)
 enum TransactionCategory {
+  @HiveField(0)
   salary,
+  @HiveField(1)
   freelance,
+  @HiveField(2)
   investment,
 
+  @HiveField(3)
   food,
+  @HiveField(4)
   shopping,
+  @HiveField(5)
   transport,
+  @HiveField(6)
   housing,
+  @HiveField(7)
   entertainment,
+  @HiveField(8)
   health,
+  @HiveField(9)
   other;
 
   bool get isIncome =>
@@ -21,12 +41,24 @@ enum TransactionCategory {
       this == TransactionCategory.investment;
 }
 
+@HiveType(typeId: 0)
 class Transaction {
+  @HiveField(0)
   final String id;
+
+  @HiveField(1)
   final String title;
+
+  @HiveField(2)
   final double value;
+
+  @HiveField(3)
   final DateTime date;
+
+  @HiveField(4)
   final TransactionType type;
+
+  @HiveField(5)
   final TransactionCategory category;
 
   Transaction({
