@@ -49,75 +49,76 @@ class _TransactionsPageState extends ConsumerState<TransactionsPage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12.0),
-        child: Column(
-          children: [
-            const SizedBox(height: 8),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "ALL TRANSACTIONS",
-                    style: TextStyle(
-                      color: Palette.greyColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Spacer(),
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        selectedCategory = null;
-                        selectedMonth = null;
-                      });
-                    },
-                    child: const Text(
-                      "Remove Filter",
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            children: [
+              const SizedBox(height: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "ALL TRANSACTIONS",
                       style: TextStyle(
-                        color: Colors.blue,
+                        color: Palette.greyColor,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ],
+                    const Spacer(),
+                    TextButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedCategory = null;
+                          selectedMonth = null;
+                        });
+                      },
+                      child: const Text(
+                        "Remove Filter",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 15),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: Row(
-                children: [
-                  CustomDropdown(
-                    category: categoryList.map((e) => e.name).toList(),
-                    selectedCategory:
-                        selectedCategory ?? TransactionCategory.other,
-                    onCategoryChanged: (val) {
-                      setState(() {
-                        selectedCategory = val;
-                      });
-                    },
-                  ),
-                  const SizedBox(width: 10),
-                  FilterDropdown(
-                    category: monthList,
-                    selectedCategory:
-                        selectedMonth ??
-                        DateFormat('MMMM').format(DateTime.now()),
-                    onCategoryChanged: (val) {
-                      setState(() {
-                        selectedMonth = val;
-                      });
-                    },
-                  ),
-                ],
+              const SizedBox(height: 15),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6),
+                child: Row(
+                  children: [
+                    CustomDropdown(
+                      category: categoryList.map((e) => e.name).toList(),
+                      selectedCategory:
+                          selectedCategory ?? TransactionCategory.other,
+                      onCategoryChanged: (val) {
+                        setState(() {
+                          selectedCategory = val;
+                        });
+                      },
+                    ),
+                    const SizedBox(width: 10),
+                    FilterDropdown(
+                      category: monthList,
+                      selectedCategory:
+                          selectedMonth ??
+                          DateFormat('MMMM').format(DateTime.now()),
+                      onCategoryChanged: (val) {
+                        setState(() {
+                          selectedMonth = val;
+                        });
+                      },
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: transactions.when(
+              const SizedBox(height: 10),
+              transactions.when(
                 data: (transactions) {
                   var filteredTransactions = transactions;
                   var datefilteredTransactions = transactions;
@@ -150,6 +151,8 @@ class _TransactionsPageState extends ConsumerState<TransactionsPage> {
                   }
 
                   return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: datefilteredTransactions.length,
                     scrollDirection: Axis.vertical,
                     itemBuilder: (context, index) {
@@ -179,8 +182,9 @@ class _TransactionsPageState extends ConsumerState<TransactionsPage> {
                 loading: () =>
                     const Center(child: CircularProgressIndicator.adaptive()),
               ),
-            ),
-          ],
+              const SizedBox(width: 80),
+            ],
+          ),
         ),
       ),
     );

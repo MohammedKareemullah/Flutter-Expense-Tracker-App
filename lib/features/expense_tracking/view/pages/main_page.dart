@@ -37,7 +37,27 @@ class _MainPageState extends ConsumerState<MainPage> {
   Widget build(BuildContext context) {
     final currentIndex = ref.watch(navIndexProvider);
     return Scaffold(
-      appBar: AppBar(leading: const Icon(Icons.settings, color: Colors.grey)),
+      appBar: AppBar(
+        title: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Text(
+            "THE BUDGETTER ",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+        ),
+
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 20),
+            child: Icon(
+              Icons.account_circle_outlined,
+              color: Colors.grey,
+              size: 30,
+            ),
+          ),
+        ],
+        elevation: 4,
+      ),
       body: Center(child: pages[currentIndex]),
       floatingActionButton: SizedBox(
         height: 80,

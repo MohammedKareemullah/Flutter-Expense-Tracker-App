@@ -25,7 +25,7 @@ class CategoryPieChart extends StatelessWidget {
                   entry.key.name[0].toUpperCase() + entry.key.name.substring(1),
               radius: 80,
               titleStyle: const TextStyle(
-                fontSize: 15,
+                fontSize: 8,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),

@@ -3,6 +3,7 @@ import 'package:expense_tracker_app/features/expense_tracking/repositories/analy
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/category_pie_chart.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/custom_card.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/transaction_card.dart';
+import 'package:expense_tracker_app/features/expense_tracking/view/widgets/weekly_bar_chart.dart';
 import 'package:expense_tracker_app/features/expense_tracking/viewmodel/nav_index_provider.dart';
 import 'package:expense_tracker_app/features/expense_tracking/viewmodel/transaction_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final transactions = ref.watch(transactionNotifierProvider);
     final totals = ref.watch(totalProvider);
-    final categoryData = AnalyticsHelper.calculateCategoryExpenses(
+    final weeklyData = AnalyticsHelper.calculateLast7DaysExpenses(
       transactions.value!,
     );
 
@@ -36,6 +37,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 30),
               Center(
                 child: Text(
                   DateFormat('d MMM yyyy').format(DateTime.now()),
@@ -166,7 +168,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 ),
               ),
               const SizedBox(height: 50),
-              CategoryPieChart(data: categoryData),
+              WeeklyBarChart(data: weeklyData),
               const SizedBox(height: 90),
             ],
           ),

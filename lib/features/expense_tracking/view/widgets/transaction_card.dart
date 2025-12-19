@@ -1,6 +1,7 @@
 import 'package:expense_tracker_app/core/theme/palette.dart';
 import 'package:expense_tracker_app/features/expense_tracking/model/transaction.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/pages/add_transaction.dart';
+import 'package:expense_tracker_app/features/expense_tracking/view/widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:expense_tracker_app/features/expense_tracking/viewmodel/transaction_viewmodel.dart';
@@ -36,6 +37,7 @@ class _TransactionCardState extends ConsumerState<TransactionCard> {
     String title = widget.title;
     String val = widget.value.toString();
     String categoryName = widget.category.name;
+    String type = widget.type.name;
 
     int n = title.characters.length;
     int m = val.characters.length;
@@ -119,6 +121,7 @@ class _TransactionCardState extends ConsumerState<TransactionCard> {
                         .read(transactionNotifierProvider.notifier)
                         .deleteTransaction(widget.id);
                     setState(() {});
+                    showSnackBar(context, "$title $type deleted sucessfully");
                   },
                   icon: const Icon(Icons.delete_outline),
                 ),
