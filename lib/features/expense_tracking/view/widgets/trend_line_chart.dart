@@ -9,8 +9,6 @@ class TrendLineChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Simple logic: Plotting the last 10 transactions by amount
-    // Ideally, you would sort by date first
     var sorted = List<Transaction>.from(transactions)
       ..sort((a, b) => a.date.compareTo(b.date));
     if (sorted.length > 10) sorted = sorted.sublist(sorted.length - 10);
@@ -29,17 +27,14 @@ class TrendLineChart extends StatelessWidget {
               sideTitles: SideTitles(showTitles: false),
             ),
 
-            // Bottom Axis: Dates
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
                 reservedSize: 30,
-                interval:
-                    1, // Draw label for every point? Or increase to 2 to skip some
+                interval: 1,
                 getTitlesWidget: (value, meta) {
                   final index = value.toInt();
                   if (index >= 0 && index < sorted.length) {
-                    // Format date as "12 Dec" or "Mon"
                     final date = sorted[index].date;
                     return Padding(
                       padding: const EdgeInsets.only(top: 8.0),

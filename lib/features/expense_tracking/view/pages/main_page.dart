@@ -8,6 +8,7 @@ import 'package:expense_tracker_app/features/expense_tracking/viewmodel/nav_inde
 import 'package:expense_tracker_app/features/expense_tracking/viewmodel/transaction_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class MainPage extends ConsumerStatefulWidget {
   const MainPage({super.key});

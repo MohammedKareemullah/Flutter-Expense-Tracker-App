@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:math';
 
+import 'package:intl/intl.dart';
+
 class HomePage extends ConsumerStatefulWidget {
   const HomePage({super.key});
 
@@ -34,11 +36,23 @@ class _HomePageState extends ConsumerState<HomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Center(
+                child: Text(
+                  DateFormat('d MMM yyyy').format(DateTime.now()),
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
               CustomCard(
                 income: totals[0],
                 expense: totals[1],
+                balance: totals[2],
                 expenseIcon: Icons.wallet_outlined,
                 incomeIcon: Icons.savings_outlined,
+                balanceIcon: Icons.attach_money_outlined,
               ),
               const SizedBox(height: 15),
               const Divider(),
@@ -153,6 +167,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               ),
               const SizedBox(height: 50),
               CategoryPieChart(data: categoryData),
+              const SizedBox(height: 90),
             ],
           ),
         ),

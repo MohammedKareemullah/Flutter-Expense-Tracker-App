@@ -4,14 +4,18 @@ import 'package:flutter/material.dart';
 class CustomCard extends StatelessWidget {
   final double income;
   final double expense;
+  final double balance;
   final IconData incomeIcon;
   final IconData expenseIcon;
+  final IconData balanceIcon;
   const CustomCard({
     super.key,
     required this.income,
     required this.expense,
+    required this.balance,
     required this.expenseIcon,
     required this.incomeIcon,
+    required this.balanceIcon,
   });
 
   @override
@@ -40,7 +44,12 @@ class CustomCard extends StatelessWidget {
                         const Spacer(),
                         Icon(expenseIcon, size: 30),
                         const SizedBox(width: 16),
-                        Text('₹ $expense', style: Apptheme().customTextStyle),
+                        Text(
+                          '₹ $expense',
+                          style: Apptheme().customTextStyle.copyWith(
+                            color: Colors.red,
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -54,7 +63,31 @@ class CustomCard extends StatelessWidget {
                         const Spacer(),
                         Icon(incomeIcon, size: 30),
                         const SizedBox(width: 16),
-                        Text('₹ $income', style: Apptheme().customTextStyle),
+                        Text(
+                          '₹ $income',
+                          style: Apptheme().customTextStyle.copyWith(
+                            color: Colors.green,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: Row(
+                      children: [
+                        Text("Balance", style: Apptheme().customTextStyle),
+                        const SizedBox(width: 16),
+                        const Spacer(),
+                        Icon(balanceIcon, size: 30),
+                        const SizedBox(width: 16),
+                        Text(
+                          '₹ $balance',
+                          style: Apptheme().customTextStyle.copyWith(
+                            color: balance < 0 ? Colors.red : Colors.green,
+                          ),
+                        ),
                       ],
                     ),
                   ),

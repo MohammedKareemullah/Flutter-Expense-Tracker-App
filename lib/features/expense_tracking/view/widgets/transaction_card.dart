@@ -59,7 +59,6 @@ class _TransactionCardState extends ConsumerState<TransactionCard> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
-              //mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
@@ -88,9 +87,12 @@ class _TransactionCardState extends ConsumerState<TransactionCard> {
                 const Spacer(),
                 Text(
                   '₹ $val',
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
+                    color: (widget.type == TransactionType.income)
+                        ? Colors.green
+                        : Colors.red,
                   ),
                 ),
                 IconButton(

@@ -1,7 +1,5 @@
 import 'package:expense_tracker_app/features/expense_tracking/model/transaction.dart';
 import 'package:expense_tracker_app/features/expense_tracking/repositories/hive_repository.dart';
-import 'package:expense_tracker_app/features/expense_tracking/view/widgets/transaction_card.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'transaction_viewmodel.g.dart';

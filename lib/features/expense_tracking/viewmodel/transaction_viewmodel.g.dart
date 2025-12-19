@@ -6,7 +6,7 @@ part of 'transaction_viewmodel.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$totalHash() => r'dff0a9b0a765ded315a5109166fae3ffeeeabeb5';
+String _$totalHash() => r'7e4892f85c731b427811c97f6418ac52c34b92d0';
 
 /// See also [total].
 @ProviderFor(total)
@@ -23,7 +23,7 @@ final totalProvider = AutoDisposeProvider<List<double>>.internal(
 // ignore: unused_element
 typedef TotalRef = AutoDisposeProviderRef<List<double>>;
 String _$transactionNotifierHash() =>
-    r'423c9072dfc5b62f2e3bf0336a2951738171d177';
+    r'ae5eb11352ae2365ec996c00f7fc3e6aab969110';
 
 /// See also [TransactionNotifier].
 @ProviderFor(TransactionNotifier)

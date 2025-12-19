@@ -47,7 +47,9 @@ class AnalyticsPage extends ConsumerWidget {
                   ],
                 ),
               ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 15),
+              const Divider(),
+              const SizedBox(height: 20),
               const Padding(
                 padding: EdgeInsets.only(left: 15.0),
                 child: Text(
