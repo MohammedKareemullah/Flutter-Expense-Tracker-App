@@ -23,11 +23,12 @@ class HiveRepository {
   ) async {
     final Box<Transaction> box = await _box;
     box.put(id, updatedtransaction);
-    //box.putAt(id, updatedtransaction);
   }
 
   Future<List<Transaction>> getTransactions() async {
     final Box<Transaction> box = await _box;
-    return box.values.toList();
+    final transactions = box.values.toList();
+    transactions.sort((a, b) => b.date.compareTo(a.date));
+    return transactions;
   }
 }

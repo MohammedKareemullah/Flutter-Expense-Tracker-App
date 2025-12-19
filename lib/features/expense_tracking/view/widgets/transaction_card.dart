@@ -43,7 +43,7 @@ class _TransactionCardState extends ConsumerState<TransactionCard> {
     int m = val.characters.length;
     int q = categoryName.characters.length;
     if (n > 8) {
-      title = "${title.substring(0, 8)}...";
+      title = "${title.substring(0, 5)}...";
     }
     if (m > 8) {
       val = "${val.substring(0, 5)}...";

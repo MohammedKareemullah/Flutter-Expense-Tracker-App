@@ -182,7 +182,7 @@ class _TransactionsPageState extends ConsumerState<TransactionsPage> {
                 loading: () =>
                     const Center(child: CircularProgressIndicator.adaptive()),
               ),
-              const SizedBox(width: 80),
+              const SizedBox(height: 80),
             ],
           ),
         ),
