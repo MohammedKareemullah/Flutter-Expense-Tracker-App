@@ -1,4 +1,6 @@
 import 'package:expense_tracker_app/core/theme/palette.dart';
+import 'package:expense_tracker_app/features/expense_tracking/repositories/analytics_helper.dart';
+import 'package:expense_tracker_app/features/expense_tracking/view/widgets/category_pie_chart.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/custom_card.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/transaction_card.dart';
 import 'package:expense_tracker_app/features/expense_tracking/viewmodel/nav_index_provider.dart';
@@ -19,54 +21,58 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     final transactions = ref.watch(transactionNotifierProvider);
     final totals = ref.watch(totalProvider);
+    final categoryData = AnalyticsHelper.calculateCategoryExpenses(
+      transactions.value!,
+    );
 
     //final trans = transactions[0];
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            CustomCard(
-              income: totals[0],
-              expense: totals[1],
-              expenseIcon: Icons.wallet_outlined,
-              incomeIcon: Icons.savings_outlined,
-            ),
-            const SizedBox(height: 15),
-            const Divider(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 6),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "RECENT TRANSACTIONS",
-                    style: TextStyle(
-                      color: Palette.greyColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {
-                      ref.read(navIndexProvider.notifier).state = 1;
-                    },
-                    child: const Text(
-                      "See all",
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomCard(
+                income: totals[0],
+                expense: totals[1],
+                expenseIcon: Icons.wallet_outlined,
+                incomeIcon: Icons.savings_outlined,
+              ),
+              const SizedBox(height: 15),
+              const Divider(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "RECENT TRANSACTIONS",
                       style: TextStyle(
-                        color: Colors.blue,
-                        fontWeight: FontWeight.bold,
+                        color: Palette.greyColor,
                         fontSize: 18,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
-                ],
+                    TextButton(
+                      onPressed: () {
+                        ref.read(navIndexProvider.notifier).state = 1;
+                      },
+                      child: const Text(
+                        "See all",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: transactions.when(
+              const SizedBox(height: 10),
+              transactions.when(
                 data: (transactions) {
                   if (transactions.isEmpty) {
                     return const Center(
@@ -81,6 +87,8 @@ class _HomePageState extends ConsumerState<HomePage> {
                   }
 
                   return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: min(transactions.length, 4),
                     scrollDirection: Axis.vertical,
                     itemBuilder: (context, index) {
@@ -110,8 +118,43 @@ class _HomePageState extends ConsumerState<HomePage> {
                 loading: () =>
                     const Center(child: CircularProgressIndicator.adaptive()),
               ),
-            ),
-          ],
+
+              const SizedBox(height: 15),
+              const Divider(),
+              const SizedBox(height: 5),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "ANALYTICS",
+                      style: TextStyle(
+                        color: Palette.greyColor,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        ref.read(navIndexProvider.notifier).state = 2;
+                      },
+                      child: const Text(
+                        "See all",
+                        style: TextStyle(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 50),
+              CategoryPieChart(data: categoryData),
+            ],
+          ),
         ),
       ),
     );

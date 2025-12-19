@@ -32,16 +32,22 @@ class _TransactionCardState extends ConsumerState<TransactionCard> {
     final IconData icon = (widget.type == TransactionType.income
         ? Icons.savings_outlined
         : Icons.wallet_outlined);
-    final categoryName = widget.category.name;
+
     String title = widget.title;
     String val = widget.value.toString();
-    int n = widget.title.characters.length;
-    int m = widget.value.toString().characters.length;
+    String categoryName = widget.category.name;
+
+    int n = title.characters.length;
+    int m = val.characters.length;
+    int q = categoryName.characters.length;
     if (n > 8) {
-      title = "${widget.title.substring(0, 9)}...";
+      title = "${title.substring(0, 8)}...";
     }
     if (m > 8) {
-      val = "${widget.value.toString().substring(0, 5)}...";
+      val = "${val.substring(0, 5)}...";
+    }
+    if (q > 8) {
+      categoryName = "${categoryName.substring(0, 6)}...";
     }
 
     return SizedBox(

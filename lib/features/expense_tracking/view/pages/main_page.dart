@@ -1,6 +1,7 @@
 import 'package:expense_tracker_app/core/theme/palette.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/Pages/add_transaction.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/Pages/home_page.dart';
+import 'package:expense_tracker_app/features/expense_tracking/view/pages/analytics_page.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/pages/recurring_payment_page.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/pages/transactions_page.dart';
 import 'package:expense_tracker_app/features/expense_tracking/viewmodel/nav_index_provider.dart';
@@ -27,6 +28,7 @@ class _MainPageState extends ConsumerState<MainPage> {
   final List<Widget> pages = [
     const HomePage(),
     const TransactionsPage(),
+    const AnalyticsPage(),
     const RecurringPaymentPage(),
   ];
 
@@ -78,8 +80,8 @@ class _MainPageState extends ConsumerState<MainPage> {
               buildNavItem(Icons.home_outlined, "Home", 0),
               buildNavItem(Icons.receipt_long_outlined, "Transaction", 1),
               const SizedBox(width: 40),
-              buildNavItem(Icons.currency_exchange_outlined, "Recurring", 2),
-              buildNavItem(Icons.person_outline, "Account", 4),
+              buildNavItem(Icons.analytics_outlined, "Analytics", 2),
+              buildNavItem(Icons.currency_exchange_outlined, "recurring", 3),
             ],
           ),
           /*items: const <BottomNavigationBarItem>[

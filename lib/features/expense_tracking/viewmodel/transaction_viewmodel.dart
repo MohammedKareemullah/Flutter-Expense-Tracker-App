@@ -60,7 +60,7 @@ class TransactionNotifier extends _$TransactionNotifier {
 
 @riverpod
 List<double> total(ref) {
-  double income = 0, expense = 0;
+  double income = 0, expense = 0, balance = 0;
   final AsyncValue<List<Transaction>> asyncTransactions = ref.watch(
     transactionNotifierProvider,
   );
@@ -71,6 +71,7 @@ List<double> total(ref) {
     } else {
       expense += transaction.value;
     }
+    balance = income - expense;
   }
-  return ([income, expense]);
+  return ([income, expense, balance]);
 }
