@@ -1,7 +1,7 @@
 import 'package:expense_tracker_app/core/theme/palette.dart';
-import 'package:expense_tracker_app/features/expense_tracking/view/Pages/transactions_page.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/custom_card.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/transaction_card.dart';
+import 'package:expense_tracker_app/features/expense_tracking/viewmodel/nav_index_provider.dart';
 import 'package:expense_tracker_app/features/expense_tracking/viewmodel/transaction_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -41,7 +41,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    "RECENT TRANSACTION",
+                    "RECENT TRANSACTIONS",
                     style: TextStyle(
                       color: Palette.greyColor,
                       fontSize: 18,
@@ -50,11 +50,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => const TransactionsPage(),
-                        ),
-                      );
+                      ref.read(navIndexProvider.notifier).state = 1;
                     },
                     child: const Text(
                       "See all",

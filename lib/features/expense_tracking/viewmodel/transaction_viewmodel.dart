@@ -1,5 +1,7 @@
 import 'package:expense_tracker_app/features/expense_tracking/model/transaction.dart';
 import 'package:expense_tracker_app/features/expense_tracking/repositories/hive_repository.dart';
+import 'package:expense_tracker_app/features/expense_tracking/view/widgets/transaction_card.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'transaction_viewmodel.g.dart';
@@ -41,6 +43,18 @@ class TransactionNotifier extends _$TransactionNotifier {
       return e.id == id ? transaction : e;
     }).toList();
     state = AsyncData(prev);
+  }
+
+  Future<List<Transaction>> filterTransactionByCategory(
+    TransactionCategory tc,
+  ) async {
+    final trans = await _repository.getTransactions();
+    return trans.where((t) => t.category == tc).toList();
+  }
+
+  void filterTransactionByDate(DateTime date) async {
+    final trans = await _repository.getTransactions();
+    state = AsyncData(trans.where((t) => t.date.month == date.month).toList());
   }
 }
 

@@ -5,11 +5,13 @@ class CustomField extends StatelessWidget {
   final TextEditingController controller;
   final VoidCallback? onTap;
   final bool isNum;
+  final bool isDate;
   const CustomField({
     required this.hintText,
     required this.controller,
     required this.isNum,
     this.onTap,
+    required this.isDate,
     super.key,
   });
 
@@ -18,9 +20,9 @@ class CustomField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       onTap: onTap,
-      keyboardType: isNum
+      keyboardType: (isNum
           ? const TextInputType.numberWithOptions()
-          : TextInputType.none,
+          : (isDate ? TextInputType.datetime : TextInputType.none)),
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),

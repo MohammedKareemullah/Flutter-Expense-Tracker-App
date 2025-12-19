@@ -10,6 +10,12 @@ class RecurringPaymentPage extends StatefulWidget {
 class _RecurringPaymentPageState extends State<RecurringPaymentPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text("Recurring Payment Page")));
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(children: [FloatingActionButton(onPressed: () {})]),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+    );
   }
 }

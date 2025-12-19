@@ -3,20 +3,24 @@ import 'package:expense_tracker_app/features/expense_tracking/view/Pages/add_tra
 import 'package:expense_tracker_app/features/expense_tracking/view/Pages/home_page.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/pages/recurring_payment_page.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/pages/transactions_page.dart';
+import 'package:expense_tracker_app/features/expense_tracking/viewmodel/nav_index_provider.dart';
+import 'package:expense_tracker_app/features/expense_tracking/viewmodel/transaction_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MainPage extends StatefulWidget {
+class MainPage extends ConsumerStatefulWidget {
   const MainPage({super.key});
 
   @override
-  State<MainPage> createState() => _MainPageState();
+  ConsumerState<MainPage> createState() => _MainPageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _MainPageState extends ConsumerState<MainPage> {
   int currentPage = 0;
   void onTap(int index) {
     setState(() {
-      currentPage = index;
+      ref.read(navIndexProvider.notifier).state = index;
+      ref.watch(transactionNotifierProvider);
     });
   }
 
@@ -28,9 +32,10 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    final currentIndex = ref.watch(navIndexProvider);
     return Scaffold(
       appBar: AppBar(leading: const Icon(Icons.settings, color: Colors.grey)),
-      body: Center(child: pages[currentPage]),
+      body: Center(child: pages[currentIndex]),
       floatingActionButton: SizedBox(
         height: 80,
         width: 80,
@@ -97,7 +102,8 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget buildNavItem(IconData icon, String label, int pos) {
-    final isSelected = pos == currentPage;
+    final currentIndex = ref.watch(navIndexProvider);
+    final isSelected = pos == currentIndex;
     return InkWell(
       onTap: () => onTap(pos),
       child: Padding(

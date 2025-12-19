@@ -34,6 +34,7 @@ class _AddTransactionState extends ConsumerState<AddTransaction> {
   final valueController = TextEditingController();
   TransactionType selectedType = TransactionType.expense;
   TransactionCategory selectedCategory = TransactionCategory.other;
+  final selectedRecurringCategory = "monthly";
   final bool isEmpty = false;
 
   Transaction? storeContent() {
@@ -61,6 +62,8 @@ class _AddTransactionState extends ConsumerState<AddTransaction> {
         .map((e) => e.name.toString())
         .toList();
 
+    List<String> recurringCategories = ["daily", "weekly", "monthly", "yearly"];
+
     Transaction? newValue;
     return Scaffold(
       appBar: AppBar(),
@@ -71,7 +74,7 @@ class _AddTransactionState extends ConsumerState<AddTransaction> {
           children: [
             //SizedBox(height: 40),
             const Text(
-              "Add Transaction",
+              "Add Recurring Payment",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
             ),
             const SizedBox(height: 40),
@@ -112,6 +115,39 @@ class _AddTransactionState extends ConsumerState<AddTransaction> {
                   const Spacer(),
                   CustomDropdown(
                     category: categories,
+                    selectedCategory: widget.isEdited
+                        ? widget.category
+                        : selectedCategory,
+                    onCategoryChanged: (val) {
+                      setState(() {
+                        selectedCategory = val;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 40),
+            CustomField(
+              hintText: "Starting Date",
+              controller: titlecontroller,
+              isNum: false,
+              isDate: true,
+            ),
+
+            const SizedBox(height: 40),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                children: [
+                  const Text(
+                    "Category",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
+                  const Spacer(),
+                  CustomDropdown(
+                    category: recurringCategories,
                     selectedCategory: widget.isEdited
                         ? widget.category
                         : selectedCategory,

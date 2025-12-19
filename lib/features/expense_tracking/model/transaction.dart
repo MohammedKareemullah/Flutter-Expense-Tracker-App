@@ -39,6 +39,22 @@ enum TransactionCategory {
       this == TransactionCategory.salary ||
       this == TransactionCategory.freelance ||
       this == TransactionCategory.investment;
+
+  static List<TransactionCategory> get expenseCategories => [
+    TransactionCategory.food,
+    TransactionCategory.shopping,
+    TransactionCategory.transport,
+    TransactionCategory.entertainment,
+    TransactionCategory.health,
+    TransactionCategory.other,
+  ];
+
+  static List<TransactionCategory> get incomeCategories => [
+    TransactionCategory.salary,
+    TransactionCategory.freelance,
+    TransactionCategory.investment,
+    TransactionCategory.other,
+  ];
 }
 
 @HiveType(typeId: 0)

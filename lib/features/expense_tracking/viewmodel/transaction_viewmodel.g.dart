@@ -23,7 +23,7 @@ final totalProvider = AutoDisposeProvider<List<double>>.internal(
 // ignore: unused_element
 typedef TotalRef = AutoDisposeProviderRef<List<double>>;
 String _$transactionNotifierHash() =>
-    r'40929aabf4fe3ae3b5e030b8b20792d4dcf56c4c';
+    r'423c9072dfc5b62f2e3bf0336a2951738171d177';
 
 /// See also [TransactionNotifier].
 @ProviderFor(TransactionNotifier)

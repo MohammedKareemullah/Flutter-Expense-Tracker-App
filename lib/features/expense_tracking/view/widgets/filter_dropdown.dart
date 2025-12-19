@@ -1,12 +1,11 @@
 import 'package:expense_tracker_app/core/theme/palette.dart';
-import 'package:expense_tracker_app/features/expense_tracking/model/transaction.dart';
 import 'package:flutter/material.dart';
 
-class CustomDropdown extends StatelessWidget {
+class FilterDropdown extends StatelessWidget {
   final List<String> category;
-  final TransactionCategory selectedCategory;
-  final Function(TransactionCategory) onCategoryChanged;
-  const CustomDropdown({
+  final String selectedCategory;
+  final Function(String) onCategoryChanged;
+  const FilterDropdown({
     super.key,
     required this.category,
     required this.selectedCategory,
@@ -23,12 +22,12 @@ class CustomDropdown extends StatelessWidget {
       ),
       child: Center(
         child: DropdownButton<String>(
-          hint: const Text('select category'),
-          value: selectedCategory.name,
+          hint: const Text('select Month'),
+          value: selectedCategory,
           //itemHeight: 10,
           onChanged: (String? value) {
             if (value != null) {
-              onCategoryChanged(TransactionCategory.values.byName(value));
+              onCategoryChanged(value);
             }
           },
           items: category.map<DropdownMenuItem<String>>((String val) {
