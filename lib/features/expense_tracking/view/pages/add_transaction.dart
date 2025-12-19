@@ -3,12 +3,27 @@ import 'package:expense_tracker_app/features/expense_tracking/view/widgets/custo
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/custom_dropdown.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/custom_field.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/custom_radio.dart';
+import 'package:expense_tracker_app/features/expense_tracking/view/widgets/snack_bar.dart';
 import 'package:expense_tracker_app/features/expense_tracking/viewmodel/transaction_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddTransaction extends ConsumerStatefulWidget {
-  const AddTransaction({super.key});
+  final String id;
+  final String title;
+  final double value;
+  final TransactionType type;
+  final TransactionCategory category;
+  final bool isEdited;
+  const AddTransaction({
+    super.key,
+    this.title = "",
+    this.value = 0,
+    this.type = TransactionType.expense,
+    this.category = TransactionCategory.other,
+    this.id = "",
+    required this.isEdited,
+  });
 
   @override
   ConsumerState<AddTransaction> createState() => _AddTransactionState();
@@ -19,8 +34,12 @@ class _AddTransactionState extends ConsumerState<AddTransaction> {
   final valueController = TextEditingController();
   TransactionType selectedType = TransactionType.expense;
   TransactionCategory selectedCategory = TransactionCategory.other;
+  final bool isEmpty = false;
 
-  Transaction storeContent() {
+  Transaction? storeContent() {
+    if (titlecontroller.text == '' || valueController.text == '') {
+      return null;
+    }
     return Transaction.create(
       title: titlecontroller.text,
       value: double.parse(valueController.text),
@@ -35,7 +54,9 @@ class _AddTransactionState extends ConsumerState<AddTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    Transaction newValue;
+    (widget.isEdited) ? (titlecontroller.text = widget.title) : '';
+    (widget.isEdited) ? (valueController.text = widget.value.toString()) : '';
+    Transaction? newValue;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -64,7 +85,7 @@ class _AddTransactionState extends ConsumerState<AddTransaction> {
             CustomRadio(
               radioText1: "Income",
               radioText2: "Expense",
-              selectedType: selectedType,
+              selectedType: widget.isEdited ? widget.type : selectedType,
               onTypeChanged: (val) {
                 setState(() {
                   selectedType = val;
@@ -83,7 +104,9 @@ class _AddTransactionState extends ConsumerState<AddTransaction> {
                   const Spacer(),
                   CustomDropdown(
                     category: categories,
-                    selectedCategory: selectedCategory,
+                    selectedCategory: widget.isEdited
+                        ? widget.category
+                        : selectedCategory,
                     onCategoryChanged: (val) {
                       setState(() {
                         selectedCategory = val;
@@ -99,14 +122,27 @@ class _AddTransactionState extends ConsumerState<AddTransaction> {
               child: CustomButton(
                 onTap: () {
                   newValue = storeContent();
-                  ref
-                      .read(transactionNotifierProvider.notifier)
-                      .addTransaction(newValue);
-                  titlecontroller.clear();
-                  valueController.clear();
-                  Navigator.of(context).pop();
+                  if (newValue == null) {
+                    showSnackBar(
+                      context,
+                      "Title and Value Field cannot be empty",
+                    );
+                  } else {
+                    widget.isEdited
+                        ? (ref
+                              .read(transactionNotifierProvider.notifier)
+                              .updateTransaction(widget.id, newValue!))
+                        : (ref
+                              .read(transactionNotifierProvider.notifier)
+                              .addTransaction(newValue!));
+                    titlecontroller.clear();
+                    valueController.clear();
+                    Navigator.of(context).pop();
+                  }
+
+                  setState(() {});
                 },
-                text: "Add",
+                text: widget.isEdited ? "Update" : "Add",
               ),
             ),
           ],

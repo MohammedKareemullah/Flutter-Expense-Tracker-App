@@ -19,11 +19,11 @@ class CustomField extends StatelessWidget {
       controller: controller,
       onTap: onTap,
       keyboardType: isNum
-          ? TextInputType.numberWithOptions()
+          ? const TextInputType.numberWithOptions()
           : TextInputType.none,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+        hintStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
       ),
       validator: (val) {
         if (val!.trim().isEmpty) {

@@ -10,7 +10,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
+        gradient: const LinearGradient(
           colors: [Palette.gradient1, Palette.gradient2],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -20,7 +20,7 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: (onTap),
         style: ElevatedButton.styleFrom(
-          minimumSize: Size(double.infinity, 80),
+          minimumSize: const Size(double.infinity, 80),
           shadowColor: Palette.transparentColor,
           backgroundColor: Palette.transparentColor,
         ),

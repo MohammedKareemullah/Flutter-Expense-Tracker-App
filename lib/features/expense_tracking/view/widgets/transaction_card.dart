@@ -1,8 +1,10 @@
 import 'package:expense_tracker_app/core/theme/palette.dart';
 import 'package:expense_tracker_app/features/expense_tracking/model/transaction.dart';
+import 'package:expense_tracker_app/features/expense_tracking/view/pages/add_transaction.dart';
 import 'package:flutter/material.dart';
 
-class TransactionCard extends StatelessWidget {
+class TransactionCard extends StatefulWidget {
+  final String id;
   final String title;
   final double value;
   final DateTime date;
@@ -15,14 +17,31 @@ class TransactionCard extends StatelessWidget {
     required this.date,
     required this.type,
     required this.category,
+    required this.id,
   });
 
   @override
+  State<TransactionCard> createState() => _TransactionCardState();
+}
+
+class _TransactionCardState extends State<TransactionCard> {
+  @override
   Widget build(BuildContext context) {
-    final IconData icon = (type == TransactionType.income
+    final IconData icon = (widget.type == TransactionType.income
         ? Icons.savings_outlined
         : Icons.wallet_outlined);
-    final categoryName = category.name;
+    final categoryName = widget.category.name;
+    String title = widget.title;
+    String val = widget.value.toString();
+    int n = widget.title.characters.length;
+    int m = widget.value.toString().characters.length;
+    if (n > 8) {
+      title = "${widget.title.substring(0, 9)}...";
+    }
+    if (m > 8) {
+      val = "${widget.value.toString().substring(0, 5)}...";
+    }
+
     return SizedBox(
       width: double.infinity,
       height: 70,
@@ -30,7 +49,7 @@ class TransactionCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 5.0),
         child: Card(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Row(
               //mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,31 +57,55 @@ class TransactionCard extends StatelessWidget {
                 Row(
                   children: [
                     Icon(icon),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Text(
                       title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
                       ),
                     ),
                   ],
                 ),
-
-                SizedBox(width: 8),
+                const SizedBox(width: 8),
                 Text(
                   '( $categoryName )',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 15,
                     color: Palette.greyColor,
                   ),
                 ),
 
-                Spacer(),
+                const Spacer(),
                 Text(
-                  '₹ $value',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                  '₹ $val',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => AddTransaction(
+                          isEdited: true,
+                          title: widget.title,
+                          value: widget.value,
+                          type: widget.type,
+                          category: widget.category,
+                          id: widget.id,
+                        ),
+                      ),
+                    );
+                    setState(() {});
+                  },
+                  icon: const Icon(Icons.edit),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.delete_outline),
                 ),
               ],
             ),

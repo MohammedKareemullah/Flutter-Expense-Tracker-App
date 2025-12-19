@@ -6,6 +6,22 @@ part of 'transaction_viewmodel.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$totalHash() => r'dff0a9b0a765ded315a5109166fae3ffeeeabeb5';
+
+/// See also [total].
+@ProviderFor(total)
+final totalProvider = AutoDisposeProvider<List<double>>.internal(
+  total,
+  name: r'totalProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$totalHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef TotalRef = AutoDisposeProviderRef<List<double>>;
 String _$transactionNotifierHash() =>
     r'40929aabf4fe3ae3b5e030b8b20792d4dcf56c4c';
 

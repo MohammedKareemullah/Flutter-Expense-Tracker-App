@@ -23,7 +23,7 @@ class CustomDropdown extends StatelessWidget {
       ),
       child: Center(
         child: DropdownButton<String>(
-          hint: Text('select category'),
+          hint: const Text('select category'),
           value: selectedCategory.name,
           //itemHeight: 10,
           onChanged: (String? value) {
@@ -36,7 +36,10 @@ class CustomDropdown extends StatelessWidget {
               value: val,
               child: Text(
                 val.characters.elementAt(0).toUpperCase() + val.substring(1),
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20,
+                ),
               ),
             );
           }).toList(),

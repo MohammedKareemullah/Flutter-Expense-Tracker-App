@@ -9,12 +9,12 @@ class Apptheme {
 
   final theme = ThemeData.light(useMaterial3: true).copyWith(
     scaffoldBackgroundColor: Palette.backgroundColor,
-    appBarTheme: AppBarTheme(backgroundColor: Palette.backgroundColor),
+    appBarTheme: const AppBarTheme(backgroundColor: Palette.backgroundColor),
 
     textTheme: ThemeData.light().textTheme.apply(fontFamily: 'Product'),
 
     inputDecorationTheme: InputDecorationTheme(
-      contentPadding: EdgeInsets.all(20),
+      contentPadding: const EdgeInsets.all(20),
       enabledBorder: border(Palette.borderColor),
       focusedBorder: border(Palette.borderColor),
     ),
@@ -28,5 +28,8 @@ class Apptheme {
     ),
   );
 
-  final customTextStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.w900);
+  final customTextStyle = const TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w900,
+  );
 }

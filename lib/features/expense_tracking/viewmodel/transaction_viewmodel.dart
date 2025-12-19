@@ -43,3 +43,20 @@ class TransactionNotifier extends _$TransactionNotifier {
     state = AsyncData(prev);
   }
 }
+
+@riverpod
+List<double> total(ref) {
+  double income = 0, expense = 0;
+  final AsyncValue<List<Transaction>> asyncTransactions = ref.watch(
+    transactionNotifierProvider,
+  );
+  final transactions = asyncTransactions.valueOrNull ?? [];
+  for (Transaction transaction in transactions) {
+    if (transaction.type == TransactionType.income) {
+      income += transaction.value;
+    } else {
+      expense += transaction.value;
+    }
+  }
+  return ([income, expense]);
+}

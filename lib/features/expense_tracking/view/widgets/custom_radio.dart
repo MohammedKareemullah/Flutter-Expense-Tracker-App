@@ -22,7 +22,7 @@ class CustomRadio extends StatelessWidget {
           child: RadioListTile(
             title: Text(
               radioText1,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
             value: TransactionType.values.byName(radioText1.toLowerCase()),
             groupValue: selectedType,
@@ -37,7 +37,7 @@ class CustomRadio extends StatelessWidget {
           child: RadioListTile(
             title: Text(
               radioText2,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
             ),
             value: TransactionType.values.byName(radioText2.toLowerCase()),
             groupValue: selectedType,

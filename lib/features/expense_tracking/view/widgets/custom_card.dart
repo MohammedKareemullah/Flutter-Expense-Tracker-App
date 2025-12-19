@@ -36,24 +36,24 @@ class CustomCard extends StatelessWidget {
                     child: Row(
                       children: [
                         Text("Expenses", style: Apptheme().customTextStyle),
-                        SizedBox(width: 16),
-                        Spacer(),
+                        const SizedBox(width: 16),
+                        const Spacer(),
                         Icon(expenseIcon, size: 30),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         Text('₹ $expense', style: Apptheme().customTextStyle),
                       ],
                     ),
                   ),
-                  Divider(),
+                  const Divider(),
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     child: Row(
                       children: [
                         Text("Income", style: Apptheme().customTextStyle),
-                        SizedBox(width: 16),
-                        Spacer(),
+                        const SizedBox(width: 16),
+                        const Spacer(),
                         Icon(incomeIcon, size: 30),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         Text('₹ $income', style: Apptheme().customTextStyle),
                       ],
                     ),

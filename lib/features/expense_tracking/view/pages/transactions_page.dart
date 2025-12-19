@@ -14,6 +14,7 @@ class _TransactionsPageState extends ConsumerState<TransactionsPage> {
   @override
   Widget build(BuildContext context) {
     final transactions = ref.watch(transactionNotifierProvider);
+    final totals = ref.watch(totalProvider);
 
     return Scaffold(
       body: Padding(
@@ -47,6 +48,7 @@ class _TransactionsPageState extends ConsumerState<TransactionsPage> {
                         date: trans.date,
                         type: trans.type,
                         category: trans.category,
+                        id: trans.id,
                       );
                     },
                   );

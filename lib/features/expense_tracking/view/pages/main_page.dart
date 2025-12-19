@@ -29,16 +29,18 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(leading: Icon(Icons.settings, color: Colors.grey)),
+      appBar: AppBar(leading: const Icon(Icons.settings, color: Colors.grey)),
       body: Center(child: pages[currentPage]),
       floatingActionButton: SizedBox(
         height: 80,
         width: 80,
         child: FloatingActionButton(
           onPressed: () {
-            Navigator.of(
-              context,
-            ).push(MaterialPageRoute(builder: (context) => AddTransaction()));
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const AddTransaction(isEdited: false),
+              ),
+            );
           },
           backgroundColor: Palette.primaryBlack,
           shape: const CircleBorder(),
@@ -99,7 +101,7 @@ class _MainPageState extends State<MainPage> {
     return InkWell(
       onTap: () => onTap(pos),
       child: Padding(
-        padding: EdgeInsets.only(left: 8, right: 8),
+        padding: const EdgeInsets.only(left: 8, right: 8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

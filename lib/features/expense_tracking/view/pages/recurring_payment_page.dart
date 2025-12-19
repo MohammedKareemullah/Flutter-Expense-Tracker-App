@@ -10,6 +10,6 @@ class RecurringPaymentPage extends StatefulWidget {
 class _RecurringPaymentPageState extends State<RecurringPaymentPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(child: Text("Recurring Payment Page")));
+    return const Scaffold(body: Center(child: Text("Recurring Payment Page")));
   }
 }
