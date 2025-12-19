@@ -19,10 +19,10 @@ class TransactionNotifier extends _$TransactionNotifier {
     state = AsyncData([...prev, transaction]);
   }
 
-  void deleteTransaction(Transaction transaction) async {
-    await _repository.deleteTransaction(transaction);
+  void deleteTransaction(String id) async {
+    await _repository.deleteTransaction(id);
     final prev = state.value ?? [];
-    state = AsyncData(prev.where((t) => t.id != transaction.id).toList());
+    state = AsyncData(prev.where((t) => t.id != id).toList());
   }
 
   void updateTransaction(String id, Transaction transaction) async {

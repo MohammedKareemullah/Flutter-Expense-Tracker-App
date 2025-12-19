@@ -2,8 +2,10 @@ import 'package:expense_tracker_app/core/theme/palette.dart';
 import 'package:expense_tracker_app/features/expense_tracking/model/transaction.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/pages/add_transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:expense_tracker_app/features/expense_tracking/viewmodel/transaction_viewmodel.dart';
 
-class TransactionCard extends StatefulWidget {
+class TransactionCard extends ConsumerStatefulWidget {
   final String id;
   final String title;
   final double value;
@@ -21,10 +23,10 @@ class TransactionCard extends StatefulWidget {
   });
 
   @override
-  State<TransactionCard> createState() => _TransactionCardState();
+  ConsumerState<TransactionCard> createState() => _TransactionCardState();
 }
 
-class _TransactionCardState extends State<TransactionCard> {
+class _TransactionCardState extends ConsumerState<TransactionCard> {
   @override
   Widget build(BuildContext context) {
     final IconData icon = (widget.type == TransactionType.income
@@ -104,7 +106,12 @@ class _TransactionCardState extends State<TransactionCard> {
                   icon: const Icon(Icons.edit),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ref
+                        .read(transactionNotifierProvider.notifier)
+                        .deleteTransaction(widget.id);
+                    setState(() {});
+                  },
                   icon: const Icon(Icons.delete_outline),
                 ),
               ],
