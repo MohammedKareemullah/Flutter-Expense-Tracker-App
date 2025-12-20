@@ -1,4 +1,5 @@
 import 'package:expense_tracker_app/core/theme/palette.dart';
+import 'package:expense_tracker_app/core/theme/theme.dart';
 import 'package:expense_tracker_app/features/expense_tracking/model/transaction.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/custom_dropdown.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/filter_dropdown.dart';
@@ -59,13 +60,9 @@ class _TransactionsPageState extends ConsumerState<TransactionsPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       "ALL TRANSACTIONS",
-                      style: TextStyle(
-                        color: Palette.greyColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Apptheme().customGreyTextStyle,
                     ),
                     const Spacer(),
                     TextButton(
@@ -75,13 +72,9 @@ class _TransactionsPageState extends ConsumerState<TransactionsPage> {
                           selectedMonth = null;
                         });
                       },
-                      child: const Text(
+                      child: Text(
                         "Remove Filter",
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
+                        style: Apptheme().customGreyTextStyle,
                       ),
                     ),
                   ],
@@ -139,13 +132,10 @@ class _TransactionsPageState extends ConsumerState<TransactionsPage> {
                   }
 
                   if (datefilteredTransactions.isEmpty) {
-                    return const Center(
+                    return Center(
                       child: Text(
                         "No Transactions yet!",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+                        style: Apptheme().customTextStyle,
                       ),
                     );
                   }
@@ -172,10 +162,7 @@ class _TransactionsPageState extends ConsumerState<TransactionsPage> {
                   return Center(
                     child: Text(
                       "Error : $error",
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                      style: Apptheme().customTextStyle,
                     ),
                   );
                 },

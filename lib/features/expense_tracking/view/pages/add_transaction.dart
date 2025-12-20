@@ -1,3 +1,4 @@
+import 'package:expense_tracker_app/core/theme/theme.dart';
 import 'package:expense_tracker_app/features/expense_tracking/model/transaction.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/custom_button.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/custom_dropdown.dart';
@@ -70,9 +71,9 @@ class _AddTransactionState extends ConsumerState<AddTransaction> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             //SizedBox(height: 40),
-            const Text(
+            Text(
               "Add Transaction",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+              style: Apptheme().customTextStyle.copyWith(fontSize: 30),
             ),
             const SizedBox(height: 40),
             CustomField(
@@ -105,9 +106,11 @@ class _AddTransactionState extends ConsumerState<AddTransaction> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 children: [
-                  const Text(
+                  Text(
                     "Category",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                    style: Apptheme().customTextStyle.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const Spacer(),
                   CustomDropdown(

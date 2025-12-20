@@ -1,4 +1,5 @@
 import 'package:expense_tracker_app/core/theme/palette.dart';
+import 'package:expense_tracker_app/core/theme/theme.dart';
 import 'package:expense_tracker_app/features/expense_tracking/repositories/analytics_helper.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/category_pie_chart.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/trend_line_chart.dart';
@@ -30,31 +31,24 @@ class AnalyticsPage extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 30),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 6),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      "ANALYTICS",
-                      style: TextStyle(
-                        color: Palette.greyColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Spacer(),
+                    Text("ANALYTICS", style: Apptheme().customGreyTextStyle),
+                    const Spacer(),
                   ],
                 ),
               ),
               const SizedBox(height: 15),
               const Divider(),
               const SizedBox(height: 20),
-              const Padding(
-                padding: EdgeInsets.only(left: 15.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0),
                 child: Text(
                   "Transaction Trend",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: Apptheme().customTextStyle,
                 ),
               ),
               const SizedBox(height: 30),
@@ -70,11 +64,11 @@ class AnalyticsPage extends ConsumerWidget {
               const SizedBox(height: 20),
               const Divider(),
               const SizedBox(height: 20),
-              const Padding(
-                padding: EdgeInsets.only(left: 15.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0),
                 child: Text(
                   "Spendings by Category",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: Apptheme().customTextStyle,
                 ),
               ),
               const SizedBox(height: 60),
@@ -90,11 +84,11 @@ class AnalyticsPage extends ConsumerWidget {
               const SizedBox(height: 40),
               const Divider(),
               const SizedBox(height: 20),
-              const Padding(
-                padding: EdgeInsets.only(left: 15.0),
+              Padding(
+                padding: const EdgeInsets.only(left: 15.0),
                 child: Text(
                   "Weekly Spendings",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: Apptheme().customTextStyle,
                 ),
               ),
               const SizedBox(height: 60),

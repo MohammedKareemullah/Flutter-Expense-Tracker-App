@@ -1,4 +1,5 @@
 import 'package:expense_tracker_app/core/theme/palette.dart';
+import 'package:expense_tracker_app/core/theme/theme.dart';
 import 'package:expense_tracker_app/features/expense_tracking/model/transaction.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/pages/add_transaction.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/snack_bar.dart';
@@ -67,31 +68,19 @@ class _TransactionCardState extends ConsumerState<TransactionCard> {
                   children: [
                     Icon(icon),
                     const SizedBox(width: 16),
-                    Text(
-                      title,
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
-                    ),
+                    Text(title, style: Apptheme().customTextStyle),
                   ],
                 ),
                 const SizedBox(width: 8),
                 Text(
                   '( $categoryName )',
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15,
-                    color: Palette.greyColor,
-                  ),
+                  style: Apptheme().customGreyTextStyle,
                 ),
 
                 const Spacer(),
                 Text(
                   '₹ $val',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                  style: Apptheme().customTextStyle.copyWith(
                     color: (widget.type == TransactionType.income)
                         ? Colors.green
                         : Colors.red,

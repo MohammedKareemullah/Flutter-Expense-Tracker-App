@@ -32,4 +32,16 @@ class Apptheme {
     fontSize: 20,
     fontWeight: FontWeight.bold,
   );
+
+  final customGreyTextStyle = const TextStyle(
+    color: Palette.greyColor,
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
+
+  final textButtonStyle = const TextStyle(
+    color: Colors.blue,
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+  );
 }

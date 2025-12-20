@@ -1,4 +1,5 @@
 import 'package:expense_tracker_app/core/theme/palette.dart';
+import 'package:expense_tracker_app/core/theme/theme.dart';
 import 'package:expense_tracker_app/features/expense_tracking/repositories/analytics_helper.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/category_pie_chart.dart';
 import 'package:expense_tracker_app/features/expense_tracking/view/widgets/custom_card.dart';
@@ -41,10 +42,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               Center(
                 child: Text(
                   DateFormat('d MMM yyyy').format(DateTime.now()),
-                  style: const TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: Apptheme().customTextStyle,
                 ),
               ),
               const SizedBox(height: 20),
@@ -63,13 +61,9 @@ class _HomePageState extends ConsumerState<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       "RECENT TRANSACTIONS",
-                      style: TextStyle(
-                        color: Palette.greyColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Apptheme().customGreyTextStyle,
                     ),
                     TextButton(
                       onPressed: () {
@@ -91,13 +85,10 @@ class _HomePageState extends ConsumerState<HomePage> {
               transactions.when(
                 data: (transactions) {
                   if (transactions.isEmpty) {
-                    return const Center(
+                    return Center(
                       child: Text(
                         "No Transactions yet!",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
-                        ),
+                        style: Apptheme().customTextStyle,
                       ),
                     );
                   }
@@ -124,10 +115,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   return Center(
                     child: Text(
                       "Error : $error",
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                      style: Apptheme().customTextStyle,
                     ),
                   );
                 },
@@ -143,26 +131,12 @@ class _HomePageState extends ConsumerState<HomePage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      "ANALYTICS",
-                      style: TextStyle(
-                        color: Palette.greyColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    Text("ANALYTICS", style: Apptheme().customGreyTextStyle),
                     TextButton(
                       onPressed: () {
                         ref.read(navIndexProvider.notifier).state = 2;
                       },
-                      child: const Text(
-                        "See all",
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18,
-                        ),
-                      ),
+                      child: Text("See all", style: Apptheme().textButtonStyle),
                     ),
                   ],
                 ),
