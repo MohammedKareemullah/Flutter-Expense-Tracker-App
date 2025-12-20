@@ -42,18 +42,6 @@ class TransactionNotifier extends _$TransactionNotifier {
     }).toList();
     state = AsyncData(prev);
   }
-
-  Future<List<Transaction>> filterTransactionByCategory(
-    TransactionCategory tc,
-  ) async {
-    final trans = await _repository.getTransactions();
-    return trans.where((t) => t.category == tc).toList();
-  }
-
-  void filterTransactionByDate(DateTime date) async {
-    final trans = await _repository.getTransactions();
-    state = AsyncData(trans.where((t) => t.date.month == date.month).toList());
-  }
 }
 
 @riverpod
